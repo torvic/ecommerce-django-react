@@ -1,34 +1,40 @@
 import CardProduct from "../components/CardProduct";
 import { helpHttp } from "../helpers/helpHttp";
 import { useState, useEffect } from 'react';
+import Loader from "../components/Loader";
+import StoreCards from "../components/StoreCards";
+import Message from "../components/Message";
+
 
 const Store = () => {
-	const [db, setDb] = useState({});
+	const [db, setDb] = useState(null);
+	const [error, setError] = useState(null);
+	const [loading, setLoading] = useState(false);
 
-	let url="";
+	let endpoint = `http://127.0.0.1:8000/products/`;
 
 	useEffect(() => {
-		helpHttp().get(url).then(res => {
+		setLoading(true)
+		helpHttp().get(endpoint).then(res => {
+			//console.log(res);
 			if(!res.err) {
 				setDb(res);
+				setError(null);
 			} else {
 				setDb(null);
-			}
+				setError(res);
+			} 
+			setLoading(false);
 		})
-	}, [url])
+	}, [endpoint])
 
 
   return (
-    <>
-			<div className="row">
-				<CardProduct />
-				<CardProduct />
-				<CardProduct />
-				<CardProduct />
-			</div>
-			{/* {db.length > 0 ? db.map(el => <CardProduct/>): <p>No hay productos</p> } */}
-			
-    </>
+			<>
+				{loading && <Loader/>}
+				{error && <Message msg={`Error ${error.statusText}`} bgColor="#dc3545" />}
+				{db && <StoreCards data={db} />}
+			</>
   );
 };
 

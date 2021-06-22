@@ -9,27 +9,29 @@ const CartTotal = () => {
       <br />
       <br />
       <table className="table">
-        <tr>
-          <th>
-            <h5>
-              Items: <strong>3</strong>
-            </h5>
-          </th>
-          <th>
-            <h5>
-              Total:<strong> $42</strong>
-            </h5>
-          </th>
-          <th>
-            <Link
-              style={{ float: "right", margin: "5px" }}
-              className="btn btn-success"
-              to="/checkout"
-            >
-              Checkout
-            </Link>
-          </th>
-        </tr>
+        <thead>
+          <tr>
+            <th>
+              <h5>
+                Items: <strong>3</strong>
+              </h5>
+            </th>
+            <th>
+              <h5>
+                Total:<strong> $42</strong>
+              </h5>
+            </th>
+            <th>
+              <Link
+                style={{ float: "right", margin: "5px" }}
+                className="btn btn-success"
+                to="/checkout"
+              >
+                Checkout
+              </Link>
+            </th>
+          </tr>
+        </thead>
       </table>
     </div>
   );

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Switch, Route } from "react-router-dom";
 import { HashRouter } from "react-router-dom";
 import Menu from "./Menu";
