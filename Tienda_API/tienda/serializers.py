@@ -24,3 +24,8 @@ class OrderItemSerializer(serializers.ModelSerializer):
 			"quantity": instance.quantity,
 			"total_price": instance.get_total(),
 		} 
+
+class OrderItemCartSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = OrderItem
+		fields = '__all__'
