@@ -28,12 +28,16 @@ const Store = () => {
 		})
 	}, [endpoint])
 
+	const createOrderItem = (data) => {
+		console.log(data);
+	}
+
 
   return (
 			<>
 				{loading && <Loader/>}
 				{error && <Message msg={`Error ${error.statusText}`} bgColor="#dc3545" />}
-				{db && <StoreCards data={db} />}
+				{db && <StoreCards data={db} createOrderItem={createOrderItem} />}
 			</>
   );
 };

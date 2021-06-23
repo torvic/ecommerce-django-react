@@ -1,5 +1,6 @@
-const CardProduct = ({el}) => {
+const CardProduct = ({el, createOrderItem}) => {
 	let {id, name, price, image} = el;
+	let orderItem = {id, "action": "Add"};
 	//console.log(el);
   return (
     <div className="col-lg-4">
@@ -10,7 +11,7 @@ const CardProduct = ({el}) => {
         </h6>
         <hr />
 
-        <button className="btn btn-outline-secondary add-btn" >Add to Cart</button>
+        <button className="btn btn-outline-secondary add-btn" onClick={()=>createOrderItem(orderItem)} >Add to Cart</button>
         <a className="btn btn-outline-success" href="#">
           View
         </a>
