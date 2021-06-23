@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
-const CartTotal = () => {
+const CartTotal = ({data}) => {
+	let {cart_items, cart_total} = data;
   return (
     <div className="box-element">
       <Link className="btn btn-outline-dark" to="/">
@@ -13,12 +14,12 @@ const CartTotal = () => {
           <tr>
             <th>
               <h5>
-                Items: <strong>3</strong>
+                Items: <strong>{cart_items}</strong>
               </h5>
             </th>
             <th>
               <h5>
-                Total:<strong> $42</strong>
+                Total:<strong> $ {cart_total}</strong>
               </h5>
             </th>
             <th>

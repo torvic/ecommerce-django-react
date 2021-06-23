@@ -1,15 +1,9 @@
 import { useState } from 'react';
+import CartOverviewProduct from './CartOverviewProduct';
 
-const CartOverview = () => {
-	const [quantity, setQuantity] = useState(1);
-
-	const handleQuantityAdd = e => {
-		setQuantity(quantity + 1)
-	}; 
-	const handleQuantityRemove = e => {
-		setQuantity(quantity - 1);
-	}; 
-
+const CartOverview = ({data}) => {
+	let {summary} = data;
+	//console.log(summary);
 
   return (
     <div className="box-element">
@@ -29,29 +23,8 @@ const CartOverview = () => {
         </div>
       </div>
 
-      <div className="cart-row">
-        <div style={{ flex: "2" }}>
-          <img className="row-image" src="images/placeholder.png" />
-        </div>
-        <div style={{ flex: "2" }}>
-          <p>Product 1</p>
-        </div>
-        <div style={{ flex: "1" }}>
-          <p>$20</p>
-        </div>
-        <div style={{ flex: "1" }}>
-          <p className="quantity">{quantity }</p>
-          <div className="quantity">
-            <img className="chg-quantity" src="images/arrow-up.png" onClick={handleQuantityAdd} />
-
-						{quantity < 2 ? null : <img className="chg-quantity" src="images/arrow-down.png" onClick={handleQuantityRemove} />}
-            
-          </div>
-        </div>
-        <div style={{ flex: "1" }}>
-          <p>$32</p>
-        </div>
-      </div>
+			{summary && summary.map(el => <CartOverviewProduct key={el.id} el={el} />)}
+						
     </div>
   );
 };
