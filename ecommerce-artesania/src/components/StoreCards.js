@@ -4,7 +4,13 @@ const StoreCards = ({ data, createOrderItem }) => {
   return (
     <div className="row">
       {data.length > 0 ? (
-        data.map((el) => <CardProduct key={el.id} el={el} createOrderItem={createOrderItem} />)
+        data.map((el) => (
+          <CardProduct
+            key={el.id}
+            el={el}
+            createOrderItem={createOrderItem}
+          />
+        ))
       ) : (
         <p>No hay productos</p>
       )}

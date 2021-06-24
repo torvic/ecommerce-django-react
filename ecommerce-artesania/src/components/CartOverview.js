@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import CartOverviewProduct from './CartOverviewProduct';
 
-const CartOverview = ({data}) => {
+const CartOverview = ({data, updateOrderItem}) => {
 	let {summary} = data;
 	//console.log(summary);
 
@@ -23,7 +23,7 @@ const CartOverview = ({data}) => {
         </div>
       </div>
 
-			{summary && summary.map(el => <CartOverviewProduct key={el.id} el={el} />)}
+			{summary && summary.map(el => <CartOverviewProduct key={el.id} el={el} updateOrderItem={updateOrderItem} />)}
 						
     </div>
   );

@@ -3,23 +3,24 @@ import CartTotal from "../components/CartTotal";
 import CartOverview from "../components/CartOverview";
 import { helpHttp } from '../helpers/helpHttp';
 
-const Cart = () => {
+const Cart = ({updateOrderItem}) => {
 	const [cart, setCart] = useState(null);	
 
-	let endpoint = "http://127.0.0.1:8000/order_items/";
+	let url = "http://127.0.0.1:8000/order_items/";
+
 	useEffect(() => {
-		helpHttp().get(endpoint).then(res => {
+		helpHttp().get(url).then(res => {
 			//console.log(res);
 			setCart(res);
 		})
-	}, [endpoint])
+	}, [url])
 
   return (
     <div className="row">
       <div className="col-lg-12">
 				{cart && <CartTotal data={cart} />}
 				<br />
-				{cart && <CartOverview data={cart} />}
+				{cart && <CartOverview data={cart} updateOrderItem={updateOrderItem} />}
 				
       </div>
     </div>
