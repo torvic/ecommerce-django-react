@@ -17,7 +17,7 @@ class OrderItemViewSet(viewsets.ViewSet):
 		#customer = request.user.customer
 		#order, created = Order.objects.get_or_create(customer=customer, complete=False)
 		items = OrderItem.objects.all()
-		cart_total = sum([item.get_total() for item in items])
+		cart_total = round(sum([item.get_total() for item in items]),2)
 		cart_items = sum([item.quantity for item in items])
 
 		items_serializer = OrderItemSerializer(items, many=True)
