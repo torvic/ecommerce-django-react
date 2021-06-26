@@ -12,7 +12,7 @@ class ProductViewSet(viewsets.ViewSet):
 
 		return Response(product_serializer.data, status = status.HTTP_200_OK)
 
-class OrderItemViewSet(viewsets.ViewSet):
+class OrderItemSummaryViewSet(viewsets.ViewSet):
 	def list(self, request):
 		#customer = request.user.customer
 		#order, created = Order.objects.get_or_create(customer=customer, complete=False)
@@ -22,6 +22,14 @@ class OrderItemViewSet(viewsets.ViewSet):
 
 		items_serializer = OrderItemSerializer(items, many=True)
 		return Response({'summary': items_serializer.data, "cart_total": cart_total, "cart_items": cart_items}, status = status.HTTP_200_OK)
+
+
+class OrderItemViewSet(viewsets.ViewSet):
+
+	def list(self, request):
+		items = OrderItem.objects.all()
+		serializer_items = OrderItemCartSerializer(items, many=True)
+		return Response(serializer_items.data, status = status.HTTP_200_OK)
 
 	def create(self, request, *args, **kwargs):
 		# Order segun al cliente (customer)

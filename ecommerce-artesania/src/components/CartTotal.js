@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-const CartTotal = ({data}) => {
-	let {cart_items, cart_total} = data;
+const CartTotal = ({ data }) => {
+  let { sumTotal, totalQuantity } = data;
+  //console.log(data);
   return (
     <div className="box-element">
       <Link className="btn btn-outline-dark" to="/">
@@ -14,17 +15,17 @@ const CartTotal = ({data}) => {
           <tr>
             <th>
               <h5>
-                Items: <strong>{cart_items}</strong>
+                Items: <strong>{totalQuantity}</strong>
               </h5>
             </th>
             <th>
               <h5>
-                Total:<strong> $ {cart_total}</strong>
+                Total:<strong> $ {sumTotal}</strong>
               </h5>
             </th>
             <th>
               <Link
-                style={{ float: "right", margin: "5px" }}
+                style={{ float: 'right', margin: '5px' }}
                 className="btn btn-success"
                 to="/checkout"
               >

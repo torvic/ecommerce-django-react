@@ -1,6 +1,11 @@
-import CardProduct from "./CardProduct";
+import CardProduct from './CardProduct';
 
-const StoreCards = ({ data, createOrderItem }) => {
+const StoreCards = ({
+  data,
+  dbOrderItem,
+  createOrderItem,
+  updateOrderItem,
+}) => {
   return (
     <div className="row">
       {data.length > 0 ? (
@@ -8,7 +13,9 @@ const StoreCards = ({ data, createOrderItem }) => {
           <CardProduct
             key={el.id}
             el={el}
+            dbOrderItem={dbOrderItem}
             createOrderItem={createOrderItem}
+            updateOrderItem={updateOrderItem}
           />
         ))
       ) : (

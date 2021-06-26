@@ -1,58 +1,77 @@
 import React, { useState } from 'react';
 
-const CartOverviewProduct = ({el, updateOrderItem}) => {
-	const [addItem, setAddItem] = useState(false)
-	const [quantityItem, setQuantityItem] = useState(el.quantity)
-	//console.log(quantityItem);
-	//console.log(addItem);
-	let {id, product, quantity, total_price } = el;
-	/* orderItem = {
+const CartOverviewProduct = ({ el, db, updateOrderItem }) => {
+  const [addItem, setAddItem] = useState(false);
+  const [quantityItem, setQuantityItem] = useState(el.quantity);
+  //console.log(quantityItem);
+  //console.log(addItem);
+  let { product, quantity } = el;
+  const dbProduct = db.filter((el) => el.id === product);
+  //console.log(dbProduct);
+  /* orderItem = {
 		id,
 		product,
 		quantity
 	} */
-	
-	const handleArrowUp = e => {
-		//update
-		setQuantityItem((prev) => prev+1);
-		//console.log("update", {quantityItem});
-		setAddItem(true);
-	};
 
-	const handleArrowDown = e => {
-		if (!addItem && quantityItem === 1) {
-			// delete
-			console.log("delete");
-		} else {
-			// update
-			setQuantityItem((prev) => prev-1);
-			//console.log("update", quantityItem);
-			setAddItem(false);
-		}
-	};
+  const handleArrowUp = (e) => {
+    //update
+    setQuantityItem((prev) => prev + 1);
+    //console.log("update", {quantityItem});
+    setAddItem(true);
+  };
 
+  const handleArrowDown = (e) => {
+    if (!addItem && quantityItem === 1) {
+      // delete
+      console.log('delete');
+    } else {
+      // update
+      setQuantityItem((prev) => prev - 1);
+      //console.log("update", quantityItem);
+      setAddItem(false);
+    }
+  };
 
   return (
     <div className="cart-row">
-      <div style={{ flex: "2" }}>
-        <img className="row-image" src={!product.image ? "images/placeholder.png":`http://127.0.0.1:8000${product.image}`} />
+      <div style={{ flex: '2' }}>
+        <img
+          className="row-image"
+          src={
+            !dbProduct[0].image
+              ? 'images/placeholder.png'
+              : `http://127.0.0.1:8000${dbProduct[0].image}`
+          }
+          alt=""
+        />
       </div>
-      <div style={{ flex: "2" }}>
-        <p>{product.name}</p>
+      <div style={{ flex: '2' }}>
+        <p>{dbProduct[0].name}</p>
       </div>
-      <div style={{ flex: "1" }}>
-        <p>$ {product.price}</p>
+      <div style={{ flex: '1' }}>
+        <p>$ {dbProduct[0].price}</p>
       </div>
-      <div style={{ flex: "1" }}>
-        <p className="quantity" >{quantity}</p>
+      <div style={{ flex: '1' }}>
+        <p className="quantity">{quantity}</p>
         <div className="quantity">
-          <img className="chg-quantity" src="images/arrow-up.png" onClick={handleArrowUp} />
+          <img
+            className="chg-quantity"
+            src="images/arrow-up.png"
+            onClick={handleArrowUp}
+            alt=""
+          />
 
-          <img className="chg-quantity" src="images/arrow-down.png" onClick={handleArrowDown} />
+          <img
+            className="chg-quantity"
+            src="images/arrow-down.png"
+            onClick={handleArrowDown}
+            alt=""
+          />
         </div>
       </div>
-      <div style={{ flex: "1" }}>
-        <p>$ {total_price}</p>
+      <div style={{ flex: '1' }}>
+        <p>$ {dbProduct[0].price * quantity}</p>
       </div>
     </div>
   );

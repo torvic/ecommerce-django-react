@@ -1,11 +1,26 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-const CardProduct = ({ el, createOrderItem }) => {
+const CardProduct = ({ el, dbOrderItem, createOrderItem, updateOrderItem }) => {
+  const [quantity, setQuantity] = useState(1);
   let { id, name, price, image } = el;
-  let orderItem = { product: id, order: 1, quantity: 1};
+  let orderItem = { order: 1, product: id, quantity };
 
-  const handleClick = (e) => {
-    createOrderItem(orderItem);
+  let dbOrderItemFiltered = dbOrderItem.filter((el) => el.product === id);
+  console.log(dbOrderItemFiltered);
+
+  //if (quantity !== 1) {
+  //  dbOrderItemFiltered = { ...dbOrderItemFiltered, quantity };
+  //}
+
+  const handleClick = () => {
+    if (dbOrderItemFiltered.length === 0) {
+      setQuantity(2);
+      createOrderItem(orderItem);
+    } else {
+      // update
+      setQuantity((prev) => prev + 1);
+      updateOrderItem({ ...orderItem, id: dbOrderItemFiltered[0].id });
+    }
   };
 
   return (
@@ -13,7 +28,7 @@ const CardProduct = ({ el, createOrderItem }) => {
       <img
         className="thumbnail"
         src={
-          !image ? "images/placeholder.png" : `http://127.0.0.1:8000${image}`
+          !image ? 'images/placeholder.png' : `http://127.0.0.1:8000${image}`
         }
         alt={name}
       ></img>
@@ -32,7 +47,7 @@ const CardProduct = ({ el, createOrderItem }) => {
         <a className="btn btn-outline-success" href="#">
           View
         </a>
-        <h4 style={{ display: "inline-block", float: "right" }}>
+        <h4 style={{ display: 'inline-block', float: 'right' }}>
           <strong>${price}</strong>
         </h4>
       </div>

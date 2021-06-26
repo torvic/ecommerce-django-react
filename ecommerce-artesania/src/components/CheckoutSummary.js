@@ -1,23 +1,36 @@
-import { Link } from "react-router-dom"
-import CheckoutSummaryProduct from "./CheckoutSummaryProduct";
+import { Link } from 'react-router-dom';
+import CheckoutSummaryProduct from './CheckoutSummaryProduct';
 
-const CheckoutSummary = ({data}) => {
-	//console.log(data);
-	let {summary, cart_items, cart_total } = data;
-	return (
-		<div className="box-element">
-			<Link  className="btn btn-outline-dark" to="/cart">&#x2190; Back to Cart</Link>
-				<hr/>
-				<h3>Order Summary</h3>
-				<hr/>
+const CheckoutSummary = ({ db, dbOrderItem }) => {
+  const getTotalPrice = () => {
+    let sumTotal = 0;
+    let totalQuantity = 0;
+    dbOrderItem.forEach((item) => {
+      const dbFiltered = db.filter((el) => item.product === el.id);
+      sumTotal += dbFiltered[0].price * item.quantity;
+      totalQuantity += item.quantity;
+    });
+    return { sumTotal, totalQuantity };
+  };
+  let { sumTotal, totalQuantity } = getTotalPrice();
+  return (
+    <div className="box-element">
+      <Link className="btn btn-outline-dark" to="/cart">
+        &#x2190; Back to Cart
+      </Link>
+      <hr />
+      <h3>Order Summary</h3>
+      <hr />
 
-				{summary && summary.map(el => <CheckoutSummaryProduct key={el.id} el={el}/>)}
-				
+      {dbOrderItem &&
+        dbOrderItem.map((el) => (
+          <CheckoutSummaryProduct key={el.id} el={el} db={db} />
+        ))}
 
-				<h5>Items:   {cart_items}</h5>
-				<h5>Total:   $ {cart_total}</h5>
-		</div>
-	)
-}
+      <h5>Items: {totalQuantity}</h5>
+      <h5>Total: $ {sumTotal}</h5>
+    </div>
+  );
+};
 
-export default CheckoutSummary
+export default CheckoutSummary;

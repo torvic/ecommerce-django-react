@@ -1,27 +1,33 @@
-import { useState, useEffect } from 'react'
-import CartTotal from "../components/CartTotal";
-import CartOverview from "../components/CartOverview";
-import { helpHttp } from '../helpers/helpHttp';
+import { useState, useEffect } from 'react';
+import CartTotal from '../components/CartTotal';
+import CartOverview from '../components/CartOverview';
 
-const Cart = ({updateOrderItem}) => {
-	const [cart, setCart] = useState(null);	
-
-	let url = "http://127.0.0.1:8000/order_items/";
-
-	useEffect(() => {
-		helpHttp().get(url).then(res => {
-			//console.log(res);
-			setCart(res);
-		})
-	}, [url])
+const Cart = ({ db, dbOrderItem, updateOrderItem }) => {
+  console.log(db);
+  console.log(dbOrderItem);
+  const getTotalPrice = () => {
+    let sumTotal = 0;
+    let totalQuantity = 0;
+    dbOrderItem.forEach((item) => {
+      const dbFiltered = db.filter((el) => item.product === el.id);
+      sumTotal += dbFiltered[0].price * item.quantity;
+      totalQuantity += item.quantity;
+    });
+    return { sumTotal, totalQuantity };
+  };
 
   return (
     <div className="row">
       <div className="col-lg-12">
-				{cart && <CartTotal data={cart} />}
-				<br />
-				{cart && <CartOverview data={cart} updateOrderItem={updateOrderItem} />}
-				
+        {dbOrderItem && <CartTotal data={getTotalPrice()} />}
+        <br />
+        {dbOrderItem && db && (
+          <CartOverview
+            db={db}
+            dbOrderItem={dbOrderItem}
+            updateOrderItem={updateOrderItem}
+          />
+        )}
       </div>
     </div>
   );
