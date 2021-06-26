@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
 import CartTotal from '../components/CartTotal';
 import CartOverview from '../components/CartOverview';
 
-const Cart = ({ db, dbOrderItem, updateOrderItem }) => {
-  console.log(db);
-  console.log(dbOrderItem);
+const Cart = ({ db, dbOrderItem, updateOrderItem, deleteOrderItem }) => {
+  //console.log(db);
+  //console.log(dbOrderItem);
   const getTotalPrice = () => {
     let sumTotal = 0;
     let totalQuantity = 0;
@@ -13,7 +12,7 @@ const Cart = ({ db, dbOrderItem, updateOrderItem }) => {
       sumTotal += dbFiltered[0].price * item.quantity;
       totalQuantity += item.quantity;
     });
-    return { sumTotal, totalQuantity };
+    return { sumTotal: Math.round(sumTotal * 100) / 100, totalQuantity };
   };
 
   return (
@@ -26,6 +25,7 @@ const Cart = ({ db, dbOrderItem, updateOrderItem }) => {
             db={db}
             dbOrderItem={dbOrderItem}
             updateOrderItem={updateOrderItem}
+            deleteOrderItem={deleteOrderItem}
           />
         )}
       </div>

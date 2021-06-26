@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import CheckoutForm from '../components/CheckoutForm';
 import CheckoutSummary from '../components/CheckoutSummary';
 

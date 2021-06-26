@@ -1,6 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-const Menu = () => {
+const Menu = ({ dbOrderItem }) => {
+  const total = () => {
+    let totalQuantity = 0;
+    dbOrderItem.forEach((el) => (totalQuantity += el.quantity));
+    return totalQuantity;
+  };
+  let totalItems = total();
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <a className="navbar-brand" href="/">
@@ -32,9 +39,9 @@ const Menu = () => {
           </Link>
 
           <Link to="/cart">
-            <img id="cart-icon" src="images/cart.png" />
+            <img id="cart-icon" src="images/cart.png" alt="cart" />
           </Link>
-          <p id="cart-total">0</p>
+          <p id="cart-total">{totalItems}</p>
         </div>
       </div>
     </nav>

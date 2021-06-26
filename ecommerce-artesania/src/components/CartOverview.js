@@ -1,7 +1,11 @@
-import { useState } from 'react';
 import CartOverviewProduct from './CartOverviewProduct';
 
-const CartOverview = ({ db, dbOrderItem, updateOrderItem }) => {
+const CartOverview = ({
+  db,
+  dbOrderItem,
+  updateOrderItem,
+  deleteOrderItem,
+}) => {
   //console.log(db);
   //console.log(dbOrderItem);
 
@@ -30,6 +34,7 @@ const CartOverview = ({ db, dbOrderItem, updateOrderItem }) => {
             el={el}
             db={db}
             updateOrderItem={updateOrderItem}
+            deleteOrderItem={deleteOrderItem}
           />
         ))}
     </div>

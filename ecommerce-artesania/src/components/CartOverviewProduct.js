@@ -1,35 +1,19 @@
-import React, { useState } from 'react';
-
-const CartOverviewProduct = ({ el, db, updateOrderItem }) => {
-  const [addItem, setAddItem] = useState(false);
-  const [quantityItem, setQuantityItem] = useState(el.quantity);
-  //console.log(quantityItem);
-  //console.log(addItem);
-  let { product, quantity } = el;
+const CartOverviewProduct = ({ el, db, updateOrderItem, deleteOrderItem }) => {
+  let { id, product, quantity } = el;
   const dbProduct = db.filter((el) => el.id === product);
-  //console.log(dbProduct);
-  /* orderItem = {
-		id,
-		product,
-		quantity
-	} */
 
-  const handleArrowUp = (e) => {
+  const handleArrowUp = () => {
     //update
-    setQuantityItem((prev) => prev + 1);
-    //console.log("update", {quantityItem});
-    setAddItem(true);
+    updateOrderItem({ ...el, quantity: quantity + 1 });
   };
 
-  const handleArrowDown = (e) => {
-    if (!addItem && quantityItem === 1) {
+  const handleArrowDown = () => {
+    if (quantity === 1) {
       // delete
-      console.log('delete');
+      deleteOrderItem(id);
     } else {
       // update
-      setQuantityItem((prev) => prev - 1);
-      //console.log("update", quantityItem);
-      setAddItem(false);
+      updateOrderItem({ ...el, quantity: quantity - 1 });
     }
   };
 
@@ -71,7 +55,7 @@ const CartOverviewProduct = ({ el, db, updateOrderItem }) => {
         </div>
       </div>
       <div style={{ flex: '1' }}>
-        <p>$ {dbProduct[0].price * quantity}</p>
+        <p>$ {Math.round(dbProduct[0].price * quantity * 100) / 100}</p>
       </div>
     </div>
   );

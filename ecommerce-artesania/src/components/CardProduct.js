@@ -1,25 +1,20 @@
-import { useState } from 'react';
-
 const CardProduct = ({ el, dbOrderItem, createOrderItem, updateOrderItem }) => {
-  const [quantity, setQuantity] = useState(1);
   let { id, name, price, image } = el;
-  let orderItem = { order: 1, product: id, quantity };
 
   let dbOrderItemFiltered = dbOrderItem.filter((el) => el.product === id);
-  console.log(dbOrderItemFiltered);
+  //console.log(dbOrderItemFiltered);
 
-  //if (quantity !== 1) {
-  //  dbOrderItemFiltered = { ...dbOrderItemFiltered, quantity };
-  //}
-
+  let orderItem = { order: 1, product: id, quantity: 1 };
   const handleClick = () => {
     if (dbOrderItemFiltered.length === 0) {
-      setQuantity(2);
+      // create
       createOrderItem(orderItem);
     } else {
       // update
-      setQuantity((prev) => prev + 1);
-      updateOrderItem({ ...orderItem, id: dbOrderItemFiltered[0].id });
+      updateOrderItem({
+        ...dbOrderItemFiltered[0],
+        quantity: dbOrderItemFiltered[0].quantity + 1,
+      });
     }
   };
 

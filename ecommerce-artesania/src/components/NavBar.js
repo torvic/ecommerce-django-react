@@ -9,15 +9,13 @@ import Checkout from '../pages/Checkout';
 import Login from '../pages/Login';
 
 const NavBar = () => {
-  const [db, setDb] = useState(null);
-  const [dbOrderItem, setDbOrderItem] = useState(null);
-  const [orderItemSummary, setOrderItemSummary] = useState(null);
+  const [db, setDb] = useState([]);
+  const [dbOrderItem, setDbOrderItem] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   let urlProducts = `http://127.0.0.1:8000/products/`;
   let urlOrderItems = 'http://127.0.0.1:8000/order_items/';
-  let urlOrderItemsSummary = 'http://127.0.0.1:8000/order_items_summary/';
 
   //console.log(dbOrderItem);
 
@@ -53,7 +51,7 @@ const NavBar = () => {
   }, [urlProducts, urlOrderItems]);
 
   const createOrderItem = (data) => {
-    console.log('crear', data);
+    //console.log('crear', data);
     let options = {
       body: data,
       headers: { 'content-type': 'application/json' },
@@ -61,7 +59,7 @@ const NavBar = () => {
     helpHttp()
       .post(urlOrderItems, options)
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         if (!res.err) {
           setDbOrderItem([...dbOrderItem, res]);
         } else {
@@ -71,7 +69,7 @@ const NavBar = () => {
   };
 
   const updateOrderItem = (data) => {
-    console.log('actualizar', data);
+    //console.log('actualizar', data);
     let endpoint = `${urlOrderItems}${data.id}/`;
     let options = {
       body: data,
@@ -80,12 +78,12 @@ const NavBar = () => {
     helpHttp()
       .put(endpoint, options)
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         if (!res.err) {
           let newData = dbOrderItem.map((el) =>
             el.id === data.id ? data : el
           );
-          console.log(newData);
+          //console.log(newData);
           setDbOrderItem(newData);
         } else {
           setError(res);
@@ -93,11 +91,24 @@ const NavBar = () => {
       });
   };
 
-  const deleteOrderItem = (id) => {};
+  const deleteOrderItem = (id) => {
+    let endpoint = `${urlOrderItems}${id}`;
+    let options = { headers: { 'content-type': 'application/json' } };
+    helpHttp()
+      .del(endpoint, options)
+      .then((res) => {
+        if (!res.err) {
+          let newData = dbOrderItem.filter((el) => el.id !== id);
+          setDbOrderItem(newData);
+        } else {
+          setError(res);
+        }
+      });
+  };
   return (
     <>
       <HashRouter>
-        <Menu />
+        <Menu dbOrderItem={dbOrderItem} />
         <Switch>
           <Route exact path="/">
             <Store
@@ -114,6 +125,7 @@ const NavBar = () => {
               db={db}
               dbOrderItem={dbOrderItem}
               updateOrderItem={updateOrderItem}
+              deleteOrderItem={deleteOrderItem}
             />
           </Route>
           <Route exact path="/checkout">

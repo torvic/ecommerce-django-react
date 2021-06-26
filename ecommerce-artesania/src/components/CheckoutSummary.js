@@ -10,7 +10,7 @@ const CheckoutSummary = ({ db, dbOrderItem }) => {
       sumTotal += dbFiltered[0].price * item.quantity;
       totalQuantity += item.quantity;
     });
-    return { sumTotal, totalQuantity };
+    return { sumTotal: Math.round(sumTotal * 100) / 100, totalQuantity };
   };
   let { sumTotal, totalQuantity } = getTotalPrice();
   return (

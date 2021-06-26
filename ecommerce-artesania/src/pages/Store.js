@@ -1,6 +1,3 @@
-import CardProduct from '../components/CardProduct';
-import { helpHttp } from '../helpers/helpHttp';
-import { useState, useEffect } from 'react';
 import Loader from '../components/Loader';
 import StoreCards from '../components/StoreCards';
 import Message from '../components/Message';
