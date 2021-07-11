@@ -1,10 +1,13 @@
 import './App.css';
-import NavBar from './components/NavBar';
+import MySite from './components/MySite';
+import { OrderItemsProvider } from './context/OrderItemsContext';
 
 function App() {
   return (
     <>
-			<NavBar/>
+      <OrderItemsProvider>
+        <MySite />
+      </OrderItemsProvider>
     </>
   );
 }

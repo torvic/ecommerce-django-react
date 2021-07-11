@@ -1,4 +1,5 @@
 .lds-roller {
+  margin-top: 60px;
   display: inline-block;
   position: relative;
   width: 80px;
@@ -9,7 +10,7 @@
   transform-origin: 40px 40px;
 }
 .lds-roller div:after {
-  content: " ";
+  content: ' ';
   display: block;
   position: absolute;
   width: 7px;

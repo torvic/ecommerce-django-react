@@ -1,14 +1,9 @@
-import CartOverviewProduct from './CartOverviewProduct';
+import { useContext } from 'react';
+import OrderItemsContext from '../context/OrderItemsContext';
+import CartOverviewOrderItem from './CartOverviewOrderItem';
 
-const CartOverview = ({
-  db,
-  dbOrderItem,
-  updateOrderItem,
-  deleteOrderItem,
-}) => {
-  //console.log(db);
-  //console.log(dbOrderItem);
-
+const CartOverview = () => {
+  const { dbOrderItem } = useContext(OrderItemsContext);
   return (
     <div className="box-element">
       <div className="cart-row">
@@ -26,17 +21,8 @@ const CartOverview = ({
           <strong>Total</strong>
         </div>
       </div>
-
       {dbOrderItem &&
-        dbOrderItem.map((el) => (
-          <CartOverviewProduct
-            key={el.id}
-            el={el}
-            db={db}
-            updateOrderItem={updateOrderItem}
-            deleteOrderItem={deleteOrderItem}
-          />
-        ))}
+        dbOrderItem.map((el) => <CartOverviewOrderItem key={el.id} el={el} />)}
     </div>
   );
 };

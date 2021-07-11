@@ -1,23 +1,17 @@
-import { useState, useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { HashRouter } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { createContext } from 'react';
 import { helpHttp } from '../helpers/helpHttp';
-import Menu from './Menu';
-import Store from '../pages/Store';
-import Cart from '../pages/Cart';
-import Checkout from '../pages/Checkout';
-import Login from '../pages/Login';
 
-const NavBar = () => {
-  const [db, setDb] = useState([]);
+const OrderItemsContext = createContext();
+
+const OrderItemsProvider = ({ children }) => {
+  const [dbProducts, setDbProducts] = useState(null);
   const [dbOrderItem, setDbOrderItem] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  let urlProducts = `http://127.0.0.1:8000/products/`;
+  let urlProducts = 'http://127.0.0.1:8000/products/';
   let urlOrderItems = 'http://127.0.0.1:8000/order_items/';
-
-  //console.log(dbOrderItem);
 
   useEffect(() => {
     const getProducts = () => {
@@ -25,12 +19,15 @@ const NavBar = () => {
       helpHttp()
         .get(urlProducts)
         .then((res) => {
-          //console.log(res);
           if (!res.err) {
-            setDb(res);
-            setError(null);
+            if (res.length === undefined) {
+              setDbProducts(null);
+            } else {
+              setDbProducts(res);
+              setError(null);
+            }
           } else {
-            setDb(null);
+            setDbProducts(null);
             setError(res);
           }
           setLoading(false);
@@ -42,7 +39,15 @@ const NavBar = () => {
         .get(urlOrderItems)
         .then((res) => {
           //console.log(res);
-          setDbOrderItem(res);
+          if (!res.err) {
+            if (res.length === undefined) {
+              setDbOrderItem([]);
+            } else {
+              setDbOrderItem(res);
+            }
+          } else {
+            setDbOrderItem([]);
+          }
         });
     };
 
@@ -105,37 +110,23 @@ const NavBar = () => {
         }
       });
   };
+
+  const data = {
+    dbProducts,
+    dbOrderItem,
+    error,
+    loading,
+    createOrderItem,
+    updateOrderItem,
+    deleteOrderItem,
+  };
   return (
-    <>
-      <HashRouter>
-        <Menu dbOrderItem={dbOrderItem} />
-        <Switch>
-          <Route exact path="/">
-            <Store
-              db={db}
-              dbOrderItem={dbOrderItem}
-              error={error}
-              loading={loading}
-              createOrderItem={createOrderItem}
-              updateOrderItem={updateOrderItem}
-            />
-          </Route>
-          <Route exact path="/cart">
-            <Cart
-              db={db}
-              dbOrderItem={dbOrderItem}
-              updateOrderItem={updateOrderItem}
-              deleteOrderItem={deleteOrderItem}
-            />
-          </Route>
-          <Route exact path="/checkout">
-            <Checkout db={db} dbOrderItem={dbOrderItem} />
-          </Route>
-          <Route exact path="/login" component={Login} />
-        </Switch>
-      </HashRouter>
-    </>
+    <OrderItemsContext.Provider value={data}>
+      {children}
+    </OrderItemsContext.Provider>
   );
 };
 
-export default NavBar;
+export { OrderItemsProvider };
+
+export default OrderItemsContext;

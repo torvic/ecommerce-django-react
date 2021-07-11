@@ -1,17 +1,15 @@
 import CheckoutForm from '../components/CheckoutForm';
 import CheckoutSummary from '../components/CheckoutSummary';
 
-const Checkout = ({ db, dbOrderItem }) => {
+const Checkout = () => {
   return (
-    <div className="row">
+    <div className="row container">
       <div className="col-lg-6">
         <CheckoutForm />
       </div>
 
       <div className="col-lg-6">
-        {dbOrderItem && db && (
-          <CheckoutSummary db={db} dbOrderItem={dbOrderItem} />
-        )}
+        <CheckoutSummary />
       </div>
     </div>
   );

@@ -1,28 +1,21 @@
-import Loader from '../components/Loader';
-import StoreCards from '../components/StoreCards';
-import Message from '../components/Message';
+import { useContext } from 'react';
+import StoreCardProduct from '../components/StoreCardProduct';
+import OrderItemsContext from '../context/OrderItemsContext';
 
-const Store = ({
-  createOrderItem,
-  db,
-  dbOrderItem,
-  error,
-  loading,
-  updateOrderItem,
-}) => {
+const Store = () => {
+  const { dbProducts } = useContext(OrderItemsContext);
   return (
-    <>
-      {loading && <Loader />}
-      {error && <Message msg={`Error ${error.statusText}`} bgColor="#dc3545" />}
-      {db && dbOrderItem && (
-        <StoreCards
-          data={db}
-          dbOrderItem={dbOrderItem}
-          createOrderItem={createOrderItem}
-          updateOrderItem={updateOrderItem}
-        />
-      )}
-    </>
+    <main>
+      <div className="row container">
+        {/* {dbProducts &&
+        dbProducts.map((el) => <CardProduct key={el.id} el={el} />)} */}
+        {dbProducts.length > 0 ? (
+          dbProducts.map((el) => <StoreCardProduct key={el.id} el={el} />)
+        ) : (
+          <p>No hay productos</p>
+        )}
+      </div>
+    </main>
   );
 };
 

@@ -1,9 +1,9 @@
 const Login = () => {
-	return (
-		<div>
-			<h3>Login</h3>
-		</div>
-	)
-}
+  return (
+    <div className="container">
+      <h3>Login</h3>
+    </div>
+  );
+};
 
-export default Login
+export default Login;

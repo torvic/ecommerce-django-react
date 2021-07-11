@@ -1,6 +1,12 @@
-const CartOverviewProduct = ({ el, db, updateOrderItem, deleteOrderItem }) => {
+import { useContext } from 'react';
+import OrderItemsContext from '../context/OrderItemsContext';
+
+const CartOverviewOrderItem = ({ el }) => {
+  const { dbProducts, updateOrderItem, deleteOrderItem } =
+    useContext(OrderItemsContext);
+
   let { id, product, quantity } = el;
-  const dbProduct = db.filter((el) => el.id === product);
+  const dbProduct = dbProducts.filter((el) => el.id === product);
 
   const handleArrowUp = () => {
     //update
@@ -16,7 +22,6 @@ const CartOverviewProduct = ({ el, db, updateOrderItem, deleteOrderItem }) => {
       updateOrderItem({ ...el, quantity: quantity - 1 });
     }
   };
-
   return (
     <div className="cart-row">
       <div style={{ flex: '2' }}>
@@ -61,4 +66,4 @@ const CartOverviewProduct = ({ el, db, updateOrderItem, deleteOrderItem }) => {
   );
 };
 
-export default CartOverviewProduct;
+export default CartOverviewOrderItem;

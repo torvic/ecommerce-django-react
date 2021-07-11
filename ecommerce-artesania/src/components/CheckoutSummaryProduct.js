@@ -1,6 +1,10 @@
-const CheckoutSummaryProduct = ({ el, db }) => {
+import { useContext } from 'react';
+import OrderItemsContext from '../context/OrderItemsContext';
+
+const CheckoutSummaryProduct = ({ el }) => {
+  const { dbProducts } = useContext(OrderItemsContext);
   let { product, quantity } = el;
-  const dbProduct = db.filter((el) => el.id === product);
+  const dbProduct = dbProducts.filter((el) => el.id === product);
 
   return (
     <div className="cart-row">

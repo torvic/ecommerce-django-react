@@ -3,19 +3,19 @@ const CheckoutForm = () => {
     <div className="box-element" id="form-wrapper">
       <form id="form">
         <div id="user-info">
-          <div className="form-field">
+          <div class="form-field">
             <input
               required
-              className="form-control"
+              class="form-control"
               type="text"
               name="name"
               placeholder="Name.."
             />
           </div>
-          <div className="form-field">
+          <div class="form-field">
             <input
               required
-              className="form-control"
+              class="form-control"
               type="email"
               name="email"
               placeholder="Email.."
@@ -27,41 +27,41 @@ const CheckoutForm = () => {
           <hr />
           <p>Shipping Information:</p>
           <hr />
-          <div className="form-field">
+          <div class="form-field">
             <input
-              className="form-control"
+              class="form-control"
               type="text"
               name="address"
               placeholder="Address.."
             />
           </div>
-          <div className="form-field">
+          <div class="form-field">
             <input
-              className="form-control"
+              class="form-control"
               type="text"
               name="city"
               placeholder="City.."
             />
           </div>
-          <div className="form-field">
+          <div class="form-field">
             <input
-              className="form-control"
+              class="form-control"
               type="text"
               name="state"
               placeholder="State.."
             />
           </div>
-          <div className="form-field">
+          <div class="form-field">
             <input
-              className="form-control"
+              class="form-control"
               type="text"
               name="zipcode"
               placeholder="Zip code.."
             />
           </div>
-          <div className="form-field">
+          <div class="form-field">
             <input
-              className="form-control"
+              class="form-control"
               type="text"
               name="country"
               placeholder="Zip code.."
@@ -72,7 +72,7 @@ const CheckoutForm = () => {
         <hr />
         <input
           id="form-button"
-          className="btn btn-success btn-block"
+          class="btn btn-success btn-block"
           type="submit"
           value="Continue"
         />
