@@ -14,7 +14,7 @@ const CheckoutSummaryProduct = ({ el }) => {
           src={
             !dbProduct[0].image
               ? 'images/placeholder.png'
-              : `http://127.0.0.1:8000${dbProduct[0].image}`
+              : `${dbProduct[0].image}`
           }
           alt=""
         />

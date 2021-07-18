@@ -27,7 +27,7 @@ const StoreCardProduct = ({ el }) => {
       <img
         className="thumbnail"
         src={
-          !image ? 'images/placeholder.png' : `http://127.0.0.1:8000${image}`
+          !image ? 'images/placeholder.png' : `${image}`
         }
         alt={name}
       ></img>

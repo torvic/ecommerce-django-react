@@ -10,8 +10,8 @@ const OrderItemsProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  let urlProducts = 'http://127.0.0.1:8000/products/';
-  let urlOrderItems = 'http://127.0.0.1:8000/order_items/';
+  let urlProducts = 'http://127.0.0.1:8000/tienda/routerproduct/';
+  let urlOrderItems = 'http://127.0.0.1:8000/tienda/routeritem/';
 
   useEffect(() => {
     const getProducts = () => {
