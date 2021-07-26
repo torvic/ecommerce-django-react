@@ -39,6 +39,9 @@ const Header = () => {
             <Link to="/login" className="btn btn-warning">
               Login
             </Link>
+            <Link style={{marginLeft:'10px'}} to="/register" className="btn btn-warning">
+              Register
+            </Link>
 
             <Link to="/cart">
               <img id="cart-icon" src="images/cart.png" alt="" />

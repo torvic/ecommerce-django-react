@@ -7,6 +7,7 @@ import Store from '../pages/Store';
 import Cart from '../pages/Cart';
 import Checkout from '../pages/Checkout';
 import Login from '../pages/Login';
+import Register from '../pages/Register';
 import Footer from './Footer';
 import OrderItemsContext from '../context/OrderItemsContext';
 import { useContext } from 'react';
@@ -30,6 +31,7 @@ const MySite = () => {
           </Route>
           <Route exact path="/checkout" component={Checkout} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
         </Switch>
         <Footer />
       </HashRouter>

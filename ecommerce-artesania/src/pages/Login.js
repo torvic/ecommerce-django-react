@@ -1,7 +1,9 @@
+import FormSection from "../sections/Public/Login/FormSection";
+
 const Login = () => {
   return (
     <div className="container">
-      <h3>Login</h3>
+			<FormSection/>
     </div>
   );
 };
