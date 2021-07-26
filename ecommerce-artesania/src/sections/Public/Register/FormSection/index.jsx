@@ -3,7 +3,7 @@ import styles from './index.module.scss'
 const FormSection = () => {
   return (
     <section>
-			<h3>Register new User</h3>
+			<h3>Register new User !!!</h3>
       <form>
         <div className='form-group'>
           <label for='name'>Name</label>
