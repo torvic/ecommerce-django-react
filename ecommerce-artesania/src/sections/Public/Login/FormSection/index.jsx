@@ -45,9 +45,9 @@ const FormSection = () => {
   } = useForm(initialForm, validationsForm)
   return (
     <div>
+			<h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div className='form-group'>
-          <label for='username'>Username</label>
           <input
             type='text'
             name='username'
@@ -55,26 +55,25 @@ const FormSection = () => {
               auth && 'is-invalid'
             }`}
             value={form.username}
+						placeholder='Username..'
             onChange={handleChange}
             onBlur={handleBlur}
-            id='username'
           />
           {errors.username && (
             <div className='invalid-feedback'>{errors.username}</div>
           )}
         </div>
         <div className='form-group'>
-          <label for='password1'>Password</label>
           <input
             type='password'
             name='password'
             className={`form-control ${errors.password && 'is-invalid'} ${
               auth && 'is-invalid'
             }`}
-            id='password1'
+            value={form.password}
+						placeholder='Password..'
             onChange={handleChange}
             onBlur={handleBlur}
-            value={form.password}
           />
           {errors.password && (
             <div className='invalid-feedback'>{errors.password}</div>
