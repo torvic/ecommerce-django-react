@@ -11,6 +11,7 @@ import Register from '../pages/Register';
 import Footer from './Footer';
 import OrderItemsContext from '../context/OrderItemsContext';
 import { useContext } from 'react';
+import Perfil from '../pages/Perfil';
 
 const MySite = () => {
   const { dbProducts, error, loading } = useContext(OrderItemsContext);
@@ -32,6 +33,7 @@ const MySite = () => {
           <Route exact path="/checkout" component={Checkout} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/perfil" component={Perfil} />
         </Switch>
         <Footer />
       </HashRouter>

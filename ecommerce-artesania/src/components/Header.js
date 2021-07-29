@@ -42,6 +42,9 @@ const Header = () => {
             <Link style={{marginLeft:'10px'}} to="/register" className="btn btn-warning">
               Register
             </Link>
+            <Link style={{marginLeft:'10px'}} to="/perfil" className="btn btn-warning">
+              Perfil
+            </Link>
 
             <Link to="/cart">
               <img id="cart-icon" src="images/cart.png" alt="" />
