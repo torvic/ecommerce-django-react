@@ -45,7 +45,7 @@ const FormSection = () => {
   } = useForm(initialForm, validationsForm)
   return (
     <div>
-			<h2>Login !!!</h2>
+			<h2>Iniciar sesión</h2>
       <form onSubmit={handleSubmit}>
         <div className='form-group'>
           <input
@@ -80,7 +80,7 @@ const FormSection = () => {
           )}
           {auth && (
             <div className='invalid-feedback'>
-              "Username" or "Password" incorrect!!!
+              "Usuario" o "Contraseña" incorrecta!!!
             </div>
           )}
         </div>
