@@ -80,7 +80,7 @@ const FormSection = () => {
           )}
           {auth && (
             <div className='invalid-feedback'>
-              "Username" or "Password" incorrect!!!
+              "Usuario" o "Contraseña" incorrecta!!!
             </div>
           )}
         </div>

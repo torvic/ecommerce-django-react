@@ -57,7 +57,7 @@ const FormSection = () => {
 
   return (
     <section>
-			<h3>Register new User</h3>
+			<h3>Register User</h3>
       <form>
         <div className='form-group'>
           <input
